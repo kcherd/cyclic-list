@@ -30,20 +30,20 @@ CyclicalList<Type>::~CyclicalList()
 template <class Type>
 void CyclicalList<Type>::Add(Type Object)
 {
-	if (beg.operator== (0))   //если список пуст
+	if (beg.operator== (0))   //РµСЃР»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚
 	{
 		beg = 0;
 
-		// запись в начало файла, для того, чтобы переместить указатель на начало первого объекта
+		// Р·Р°РїРёСЃСЊ РІ РЅР°С‡Р°Р»Рѕ С„Р°Р№Р»Р°, РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РїРµСЂРµРјРµСЃС‚РёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РЅР°С‡Р°Р»Рѕ РїРµСЂРІРѕРіРѕ РѕР±СЉРµРєС‚Р°
 		seekg(0);
 		write((char*)&beg, sizeof(streampos));
 		beg = tellg();
 
 		seekg(0);
-		write((char*)&beg, sizeof(streampos)); // указатель на первый элемент
-		write((char*)&beg, sizeof(streampos)); // указатель на предыдущий для первого - то есть на самого себя
-		write((char*)&beg, sizeof(streampos)); // указатель на следующий для первого - то есть на самого себя
-		write((char*)&Object, sizeof(Type)); // запись самого объекта
+		write((char*)&beg, sizeof(streampos)); // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚
+		write((char*)&beg, sizeof(streampos)); // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ РґР»СЏ РїРµСЂРІРѕРіРѕ - С‚Рѕ РµСЃС‚СЊ РЅР° СЃР°РјРѕРіРѕ СЃРµР±СЏ
+		write((char*)&beg, sizeof(streampos)); // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№ РґР»СЏ РїРµСЂРІРѕРіРѕ - С‚Рѕ РµСЃС‚СЊ РЅР° СЃР°РјРѕРіРѕ СЃРµР±СЏ
+		write((char*)&Object, sizeof(Type)); // Р·Р°РїРёСЃСЊ СЃР°РјРѕРіРѕ РѕР±СЉРµРєС‚Р°
 
 		size++;
 	}
@@ -54,17 +54,17 @@ void CyclicalList<Type>::Add(Type Object)
 		seekg(beg);
 		read((char*)&PrevTemp, sizeof(streampos));
 		seekg(0, end);
-		Last_object = tellg(); //указатель на добавленный элемент
-		write((char*)&PrevTemp, sizeof(streampos));// указатель на предыдущий
-		write((char*)&beg, sizeof(streampos));// указатель на следующий
-		write((char*)&Object, sizeof(Type));// объект
+		Last_object = tellg(); //СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РґРѕР±Р°РІР»РµРЅРЅС‹Р№ СЌР»РµРјРµРЅС‚
+		write((char*)&PrevTemp, sizeof(streampos));// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№
+		write((char*)&beg, sizeof(streampos));// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№
+		write((char*)&Object, sizeof(Type));// РѕР±СЉРµРєС‚
 
-		// смена указателей у других объектов                                   
+		// СЃРјРµРЅР° СѓРєР°Р·Р°С‚РµР»РµР№ Сѓ РґСЂСѓРіРёС… РѕР±СЉРµРєС‚РѕРІ                                   
 		seekg(PrevTemp.operator+(sizeof(streampos)));
-		write((char*)&Last_object, sizeof(streampos));     //заменяем указатель на сделующий элемент в старом последнем узле
+		write((char*)&Last_object, sizeof(streampos));     //Р·Р°РјРµРЅСЏРµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃРґРµР»СѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚ РІ СЃС‚Р°СЂРѕРј РїРѕСЃР»РµРґРЅРµРј СѓР·Р»Рµ
 
 		seekg(beg);
-		write((char*)&Last_object, sizeof(streampos));    //заменяем указатель на предыдущий элемент для первого
+		write((char*)&Last_object, sizeof(streampos));    //Р·Р°РјРµРЅСЏРµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЌР»РµРјРµРЅС‚ РґР»СЏ РїРµСЂРІРѕРіРѕ
 
 		seekg(0, end);
 
@@ -74,20 +74,20 @@ void CyclicalList<Type>::Add(Type Object)
 
 void CyclicalList<Line>::Add(Line Object)
 {
-	if (beg.operator== (0))   //если список пуст
+	if (beg.operator== (0))   //РµСЃР»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚
 	{
 		beg = 0;
 
-		// запись в начало файла, для того, чтобы переместить указатель на начало первого объекта
+		// Р·Р°РїРёСЃСЊ РІ РЅР°С‡Р°Р»Рѕ С„Р°Р№Р»Р°, РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РїРµСЂРµРјРµСЃС‚РёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РЅР°С‡Р°Р»Рѕ РїРµСЂРІРѕРіРѕ РѕР±СЉРµРєС‚Р°
 		seekg(0);
 		write((char*)&beg, sizeof(streampos));
 		beg = tellg();
 
 		seekg(0);
-		write((char*)&beg, sizeof(streampos)); // указатель на первый элемент
-		write((char*)&beg, sizeof(streampos)); // указатель на предыдущий для первого - то есть на самого себя
-		write((char*)&beg, sizeof(streampos)); // указатель на следующий для первого - то есть на самого себя
-		// запись самого объекта
+		write((char*)&beg, sizeof(streampos)); // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚
+		write((char*)&beg, sizeof(streampos)); // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ РґР»СЏ РїРµСЂРІРѕРіРѕ - С‚Рѕ РµСЃС‚СЊ РЅР° СЃР°РјРѕРіРѕ СЃРµР±СЏ
+		write((char*)&beg, sizeof(streampos)); // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№ РґР»СЏ РїРµСЂРІРѕРіРѕ - С‚Рѕ РµСЃС‚СЊ РЅР° СЃР°РјРѕРіРѕ СЃРµР±СЏ
+		// Р·Р°РїРёСЃСЊ СЃР°РјРѕРіРѕ РѕР±СЉРµРєС‚Р°
 		write((char*)&Object.len, sizeof(int));
 		write(Object.String, Object.len * sizeof(char));
 		write((char*)Object.time_buf, 8 * sizeof(char));
@@ -101,20 +101,20 @@ void CyclicalList<Line>::Add(Line Object)
 		seekg(beg);
 		read((char*)&PrevTemp, sizeof(streampos));
 		seekg(0, end);
-		Last_object = tellg(); //указатель на добавленный элемент
-		write((char*)&PrevTemp, sizeof(streampos));// указатель на предыдущий
-		write((char*)&beg, sizeof(streampos));// указатель на следующий
-		// запись самого объекта
+		Last_object = tellg(); //СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РґРѕР±Р°РІР»РµРЅРЅС‹Р№ СЌР»РµРјРµРЅС‚
+		write((char*)&PrevTemp, sizeof(streampos));// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№
+		write((char*)&beg, sizeof(streampos));// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№
+		// Р·Р°РїРёСЃСЊ СЃР°РјРѕРіРѕ РѕР±СЉРµРєС‚Р°
 		write((char*)&Object.len, sizeof(int));
 		write(Object.String, Object.len * sizeof(char));
 		write((char*)Object.time_buf, 8 * sizeof(char));
 
-		// смена указателей у других объектов                                   
+		// СЃРјРµРЅР° СѓРєР°Р·Р°С‚РµР»РµР№ Сѓ РґСЂСѓРіРёС… РѕР±СЉРµРєС‚РѕРІ                                   
 		seekg(PrevTemp.operator+(sizeof(streampos)));
-		write((char*)&Last_object, sizeof(streampos));     //заменяем указатель на сделующий элемент в старом последнем узле
+		write((char*)&Last_object, sizeof(streampos));     //Р·Р°РјРµРЅСЏРµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃРґРµР»СѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚ РІ СЃС‚Р°СЂРѕРј РїРѕСЃР»РµРґРЅРµРј СѓР·Р»Рµ
 
 		seekg(beg);
-		write((char*)&Last_object, sizeof(streampos));    //заменяем указатель на предыдущий элемент для первого
+		write((char*)&Last_object, sizeof(streampos));    //Р·Р°РјРµРЅСЏРµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЌР»РµРјРµРЅС‚ РґР»СЏ РїРµСЂРІРѕРіРѕ
 
 		seekg(0, end);
 
@@ -126,7 +126,7 @@ void CyclicalList<Type>::Print()
 {
 	Type object;
 	streampos Next = 0;
-	// вывод первого элемента. для того, чтобы потом можно было сделать цикл
+	// РІС‹РІРѕРґ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р°. РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РїРѕС‚РѕРј РјРѕР¶РЅРѕ Р±С‹Р»Рѕ СЃРґРµР»Р°С‚СЊ С†РёРєР»
 	seekg(beg.operator+(2 * sizeof(streampos)));
 	read((char*)&object, sizeof(Type));
 	cout << object << " ";
@@ -134,7 +134,7 @@ void CyclicalList<Type>::Print()
 	seekg(beg.operator+(sizeof(streampos)));
 	read((char*)&Next, sizeof(streampos));
 
-	// вывод остальных элементов
+	// РІС‹РІРѕРґ РѕСЃС‚Р°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 	while (Next != beg)
 	{
 		seekg(Next.operator+(2 * sizeof(streampos)));
@@ -150,7 +150,7 @@ void CyclicalList<Line>::Print()
 {
 	Line object;
 	streampos Next = 0;
-	// вывод первого элемента. для того, чтобы потом можно было сделать цикл
+	// РІС‹РІРѕРґ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р°. РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РїРѕС‚РѕРј РјРѕР¶РЅРѕ Р±С‹Р»Рѕ СЃРґРµР»Р°С‚СЊ С†РёРєР»
 	seekg(beg.operator+(2 * sizeof(streampos)));
 
 	read((char*)&object.len, sizeof(int));
@@ -164,7 +164,7 @@ void CyclicalList<Line>::Print()
 	seekg(beg.operator+(sizeof(streampos)));
 	read((char*)&Next, sizeof(streampos));
 
-	// вывод остальных элементов
+	// РІС‹РІРѕРґ РѕСЃС‚Р°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 	while (Next != beg)
 	{
 		seekg(Next.operator+(2 * sizeof(streampos)));
@@ -183,10 +183,10 @@ void CyclicalList<Line>::Print()
 	cout << endl;
 }
 template <class Type>
-void CyclicalList<Type>::Remove()// удаление последнего элемента в списке
+void CyclicalList<Type>::Remove()// СѓРґР°Р»РµРЅРёРµ РїРѕСЃР»РµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° РІ СЃРїРёСЃРєРµ
 {
 	streampos Prev, Next, Destroy;
-	//сохраняем указатели на предыдущий и следующий элементы удаляемого элемента
+	//СЃРѕС…СЂР°РЅСЏРµРј СѓРєР°Р·Р°С‚РµР»Рё РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ Рё СЃР»РµРґСѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚С‹ СѓРґР°Р»СЏРµРјРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
 	seekg(beg);
 	read((char*)&Destroy, sizeof(streampos));
 	seekg(Destroy);
@@ -194,11 +194,11 @@ void CyclicalList<Type>::Remove()// удаление последнего элемента в списке
 	seekg(Destroy.operator+(sizeof(streampos)));
 	read((char*)&Next, sizeof(streampos));
 
-	//заменяем у предыдущего элемента указатель на следующий элемент
+	//Р·Р°РјРµРЅСЏРµРј Сѓ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚
 	seekg(Prev.operator+(sizeof(streampos)));
 	write((char*)&Next, sizeof(streampos));
 
-	//заменяем у следующего элемента указатель на предыдущий
+	//Р·Р°РјРµРЅСЏРµРј Сѓ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№
 	seekg(Next);
 	write((char*)&Prev, sizeof(streampos));
 
@@ -217,12 +217,12 @@ void CyclicalList<Type>::Update(int Num, Type obj)
 
 	else
 	{
-		seekg(beg.operator+(sizeof(streampos)));//Next для первого
+		seekg(beg.operator+(sizeof(streampos)));//Next РґР»СЏ РїРµСЂРІРѕРіРѕ
 		read((char*)&Temp, sizeof(streampos));
 
 		for (int i = 1; i < Num - 1; i++)
 		{
-			seekg(Temp.operator+(sizeof(streampos)));//Next для текущего
+			seekg(Temp.operator+(sizeof(streampos)));//Next РґР»СЏ С‚РµРєСѓС‰РµРіРѕ
 			read((char*)&Temp, sizeof(streampos));
 		}
 
@@ -246,12 +246,12 @@ void CyclicalList<Line>::Update(int Num, Line obj)
 
 	else
 	{
-		seekg(beg.operator+(sizeof(streampos)));//Next для первого
+		seekg(beg.operator+(sizeof(streampos)));//Next РґР»СЏ РїРµСЂРІРѕРіРѕ
 		read((char*)&Temp, sizeof(streampos));
 
 		for (int i = 1; i < Num - 1; i++)
 		{
-			seekg(Temp.operator+(sizeof(streampos)));//Next для текущего
+			seekg(Temp.operator+(sizeof(streampos)));//Next РґР»СЏ С‚РµРєСѓС‰РµРіРѕ
 			read((char*)&Temp, sizeof(streampos));
 		}
 
@@ -281,7 +281,7 @@ void CyclicalList<Type>::Sort()
 			read((char*)&obj2, sizeof(Type));
 			if (obj1 > obj2)
 			{
-				//сохраняем старые указатели
+				//СЃРѕС…СЂР°РЅСЏРµРј СЃС‚Р°СЂС‹Рµ СѓРєР°Р·Р°С‚РµР»Рё
 				seekg(P1);
 				read((char*)&Prev1, sizeof(streampos));
 				Prev2 = P1;
@@ -290,7 +290,7 @@ void CyclicalList<Type>::Sort()
 				seekg(P2.operator+(sizeof(streampos)));
 				read((char*)&Next2, sizeof(streampos));
 
-				//меняем указатели
+				//РјРµРЅСЏРµРј СѓРєР°Р·Р°С‚РµР»Рё
 				seekg(P2);
 				write((char*)&Prev1, sizeof(streampos));
 				seekg(P1);
@@ -334,7 +334,7 @@ void CyclicalList<Line>::Sort()
 			read((char*)&obj2, sizeof(int));
 			if (obj1 > obj2)
 			{
-				//сохраняем старые указатели
+				//СЃРѕС…СЂР°РЅСЏРµРј СЃС‚Р°СЂС‹Рµ СѓРєР°Р·Р°С‚РµР»Рё
 				seekg(P1);
 				read((char*)&Prev1, sizeof(streampos));
 				Prev2 = P1;
@@ -343,7 +343,7 @@ void CyclicalList<Line>::Sort()
 				seekg(P2.operator+(sizeof(streampos)));
 				read((char*)&Next2, sizeof(streampos));
 
-				//меняем указатели
+				//РјРµРЅСЏРµРј СѓРєР°Р·Р°С‚РµР»Рё
 				seekg(P2);
 				write((char*)&Prev1, sizeof(streampos));
 				seekg(P1);
