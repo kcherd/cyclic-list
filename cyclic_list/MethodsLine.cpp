@@ -1,6 +1,6 @@
 #include "HeaderLine.h"
 
-//конструтор без параметров
+//РєРѕРЅСЃС‚СЂСѓС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
 Line::Line()
 {
 	len = -1;
@@ -8,7 +8,7 @@ Line::Line()
 	_strtime_s(time_buf);
 }
 
-// конструктор с параметрами
+// РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё
 Line::Line(int Len_in, char* Str_in)
 {
 	len = Len_in;
@@ -18,14 +18,14 @@ Line::Line(int Len_in, char* Str_in)
 
 }
 
-//деструктор
+//РґРµСЃС‚СЂСѓРєС‚РѕСЂ
 Line:: ~Line()
 {
 	if (String != NULL)
 		delete[] String;
 }
 
-//конструктор копирования
+//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 Line::Line(const Line& Str_in)
 {
 	len = Str_in.len;
@@ -34,7 +34,7 @@ Line::Line(const Line& Str_in)
 	_strtime_s(time_buf);
 }
 
-// метод сумма
+// РјРµС‚РѕРґ СЃСѓРјРјР°
 void Line::Sum(Line String1, Line String2)
 {
 	String = new char[String1.len + String2.len + 1];
@@ -45,7 +45,7 @@ void Line::Sum(Line String1, Line String2)
 	strcat(String, String2.String);
 }
 
-// метод для вывода
+// РјРµС‚РѕРґ РґР»СЏ РІС‹РІРѕРґР°
 void Line::Print()
 {
 	if (String != NULL)
@@ -54,7 +54,7 @@ void Line::Print()
 	}
 }
 
-//метод для изменения значений
+//РјРµС‚РѕРґ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№
 void Line::Change(char *String_in)
 {
 	if (String != NULL)
